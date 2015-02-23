@@ -1,0 +1,14 @@
+{
+	"mongodb": {
+		"username": "user",
+		"password": "password",
+		"host": "localhost",
+		"port": 27017,
+		"database": ""
+	},
+	"express': {
+		"port": 8000
+	}
+}
+
+//You need to create a "config.json" file in order for mongoose to work
