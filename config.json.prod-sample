@@ -1,0 +1,12 @@
+{
+	"mongodb": {
+		"username": "cs_user",
+		"password": "password",
+		"host": "superlunchvote.com",
+		"port": 27017,
+		"database": "wishlist"
+	},
+	"express": {
+		"port": 8000
+	}
+}

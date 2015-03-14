@@ -6,7 +6,7 @@
 		"port": 27017,
 		"database": ""
 	},
-	"express': {
+	"express": {
 		"port": 8000
 	}
 }

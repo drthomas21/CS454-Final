@@ -9,52 +9,8 @@
 	        <% include ../partials/header %>
 	    </header>
 	
-	    <div class='container' ng-controller="CharacterCtrl">
-	        <div ng-show="isSearching || Character.name.length == 0">
-	        	<div class="jumbotron">
-		        	<div ng-show="isSearching" style="height: 30px">
-						<p style="background-image: url('/images/ajax-loader.gif'); background-repeat: no-repeat; height: 27px; background-position-y: 4px; padding-left: 21px">{{textValue.substr(textOffset)}}</p>
-					</div>
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OUYW0JyzydA" frameborder="0" allowfullscreen></iframe>
-					</div>
-					
-				</div>
-	        </div>
-	        <div ng-hide="isSearching || Character.name.length == 0">
-	        	<div class="row" role="description">
-	        		<div class="col-md-3">
-	        			<img ng-src="{{getImage()}}" alt="{{Character.name}}" class="img-thumbnail"/>
-	        		</div>
-	        		<div class="col-md-9">
-	        			<h1>{{Character.name}} <small><strong>Last Updated: </strong>{{getDate()}}</small></h1>
-	        			<p><h3>Description</h3>{{Character.description}}</p>
-	        			<p ng-repeat="Link in Character.urls">
-	        				<a href="{{Link.url}}">{{Link.type}} page</a><br />
-	        			</p>
-	        		</div>
-	        	</div>
-	        	<div class="row" role="extra">
-	        		<div class="col-md-4">
-	        			<h3>Series:</h3>
-	        			<ul>
-	        				<li ng-repeat="Series in Character.series.items">{{Series.name}}</li>
-	        			</ul>
-	        		</div>
-	        		<div class="col-md-4">
-	        			<h3>Stories:</h3>
-	        			<ul>
-	        				<li ng-repeat="Story in Character.stories.items">{{Story.name}}</li>
-	        			</ul>
-	        		</div>
-	        		<div class="col-md-4">
-	        			<h3>Events:</h3>
-	        			<ul>
-	        				<li ng-repeat="Event in Character.events.items">{{Event.name}}</li>
-	        			</ul>
-	        		</div>
-	        	</div>
-	        </div>
+	    <div class='container' ng-controller="PageViewCtrl">
+	    	<ng-include src="src"></ng-include>
 	    </div>
 	</body>
 </html>
