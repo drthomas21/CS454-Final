@@ -2,9 +2,9 @@
 Final Project for CS454
 
 ## How To Setup:
-1: Install [Mongodb](http://www.mongodb.org/downloads)
+1. Install [Mongodb](http://www.mongodb.org/downloads)
 
-2: Connect to mongo (via Terminal):
+2. Connect to mongo (via Terminal):
 ```sh
 $ mongo
 ```
