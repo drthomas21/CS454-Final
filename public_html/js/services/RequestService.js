@@ -32,6 +32,16 @@
 				});
 			};
 			
+			this.list = function(callback) {
+				$http.get('/api/get')
+				.success(function(data) {
+					callback(data);
+				})
+				.error(function(data,status) {
+					
+				});
+			};
+			
 			this.search = function(query,callback) {
 				$http.get('/api/search',query)
 				.success(function(data) {
@@ -54,8 +64,8 @@
 			
 			
 			
-			this.remove = function(id,callback) {
-				$http.delete('/api/remove/'+id)
+			this.remove = function(Model,callback) {
+				$http.delete('/api/remove/'+Model._id,Model)
 				.success(function(data) {
 					callback(data);
 				})

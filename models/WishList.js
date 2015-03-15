@@ -27,7 +27,7 @@ module.exports = {
 		},
 		get: function(callback) {
 			WishList.find({},function(err,rows){
-				callback(rows);
+				callback(err,rows);
 			})
 		},
 		search: function(args,callback) {
@@ -35,7 +35,6 @@ module.exports = {
 				callback(err,rows)
 			});
 		},
-		update: function() {},
 		remove: function(instance) {
 			instance.remove();
 		},

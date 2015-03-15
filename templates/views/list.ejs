@@ -1,0 +1,23 @@
+<div class="col-lg-12" ng-controller="WishListCtrl" ng-init="list()">
+	<table class="table table-border">
+		<tr>
+			<th>#</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Items</th>
+			<th>Actions</th>
+		</tr>
+		<tr ng-repeat="Object in Objects">
+			<td>{{$index+1}}</td>
+			<td><a ng-href="/{{Object._id}}">{{Object._id}}</a></td>
+			<td><a ng-href="/{{Object._id}}">{{Object.name}}</a></td>
+			<td>{{Object.description.substr(0,75)}}</td>
+			<td>{{Object.items.length}}</td>
+			<td>
+				<button ng-click="editModel(Object)">Edit</button>
+				<button ng-click="removeModel(Object)">Delete</button>
+			</td>
+		</tr>
+	</table>
+</div>

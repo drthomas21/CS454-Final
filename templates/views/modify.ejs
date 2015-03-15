@@ -9,6 +9,17 @@
 			<textarea class="form-control" row="3" ng-model="Model.description"></textarea>
 		</div>
 		<div class="form-group">
+			<label>Items:</label>
+			<button ng-click="showShortForm()"><i class="glyphicon glyphicon-plus"></i> Add Item</button>
+			<div ng-show="showAddInput">
+				<input type="text" class="form-control" ng-model="tempItem" />
+				<button class="col-lg-1 pull-right btn btn-default" ng-click="addItem()" style="margin-top: -34px;">Add</button>
+			</div>
+			<ul class="list-unstyled">
+				<li ng-repeat="item in Model.items">{{item}} <i ng-click="removeItem($index)" class="glyphicon glyphicon-remove"></i></li>
+			</ul>
+		</div>
+		<div class="form-group">
 			<button class="btn btn-success" ng-click="updateModel()">Update</button>
 		</div>
 	</form>
