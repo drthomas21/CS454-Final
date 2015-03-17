@@ -62,8 +62,6 @@
 				});
 			};
 			
-			
-			
 			this.remove = function(Model,callback) {
 				$http.delete('/api/remove/'+Model._id,Model)
 				.success(function(data) {

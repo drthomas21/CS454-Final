@@ -1,0 +1,70 @@
+<div class="row" ng-controller="WishListCtrl" ng-init="init()">
+	<!-- list all wishlists -->
+	<div class="col-sm-3">
+		<h3 class="text-center">All Wishlists</h3>
+		<div class="list-group allWishlists">
+  			<a href="#" ng-click="viewModel(wishlist._id)" class="list-group-item" ng-repeat="wishlist in allWishlists" ng-click="">{{wishlist.name}}
+  				<span class="badge">{{wishlist.items.length}}</span>
+  			</a>
+  		</div>
+	</div>
+
+	<!-- create a new wishlist or add item to existing list -->
+	<div class="col-sm-9">
+		<div class="row">
+			<h3 class="text-center">Create A New WishList</h3>
+			<form class="form col-sm-8 col-sm-offset-2">
+				<div class="form-group">
+					<label>Name:</label>
+					<input type="text" class="form-control" ng-model="Model.name" />
+				</div>
+				<div class="form-group">
+					<label>Description:</label>
+					<textarea class="form-control" row="3" ng-model="Model.description"></textarea>
+				</div>
+				<div class="form-group">
+					<button ng-click="showShortForm()" style="margin-bottom: 5px"><i class="glyphicon glyphicon-plus"></i> Add Item</button>
+					<div ng-show="showAddInput">
+						<input type="text" class="form-control" ng-model="tempItem" placeholder="item name"/>
+						<button class="col-lg-1 pull-right btn btn-default" ng-click="addItem()" style="margin-top: -34px;">Add</button>
+					</div>
+					<div ng-show="Model.items.length > 0"> 
+						<label style="margin-top: 15px">Items</label>
+						<ol class="newItems">
+							<li ng-repeat="item in Model.items">{{item}} 
+								<i ng-click="removeItem($index)" class="glyphicon glyphicon-remove remove"></i></li>
+						</ol>
+					</div>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" ng-show="Model.name.length > 0" ng-click="createModel()">Create Wishlist  <span class="glyphicon glyphicon-plus"></span></button>
+					<button class="btn btn-primary" ng-show="Model.name.length == 0" disabled ng-click="createModel()">Create Wishlist <span class="glyphicon glyphicon-plus"></span></button>
+				</div>
+			</form>
+		</div>
+
+		<!-- "OR" -->
+		<div class="row">
+			<h3 class="feature"><span class="or">OR</span></h3>
+		</div>
+		<!-- add item to existing list -->
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="text-center">Add Item to Existing WishList</h3>
+				<hr>
+				<form class="form-inline text-center">
+					<div class="form-group">
+						<label for="newItem">Add new item </label>
+						<input type="text" class="form-control" ng-model="newItem" placeholder="item name" style="width: 200px">
+					</div>
+					<div class="form-group">
+						<label for="wishList">to </label>
+						<select class="form-control wishlist" ng-options="wishlist.name for wishlist in allWishlists" ng-model="selectedList" style="width: 200px"></select>
+					</div>
+					<button class="btn btn-success" ng-show="newItem.length == 0" disabled ng-click="addToExisting()">Add</button>
+					<button class="btn btn-success" ng-show="newItem.length > 0" ng-click="addToExisting()">Add</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

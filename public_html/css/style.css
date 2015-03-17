@@ -1,0 +1,41 @@
+h3.feature {
+	font-size: 16px;
+	text-align: center;
+	border-top: 1px solid #d2d4b5;
+	line-height: 1;
+	margin: 48px 30px 24px;
+}
+
+span.or {
+	background: #F3F4EB;
+	color: #b7afa9;
+	height: 48px;
+	width: 48px;
+	padding-top: 15px;
+	position: relative;
+	top: -24px;
+	display: inline-block;
+	border-radius: 24px;
+	border: 1px solid #d2d4b5;	
+}
+
+ol.newItems li {
+	padding: 5px;
+}
+
+ol.newItems i {
+	margin-left: 25px;
+}
+
+ol.newItems:hover {
+	background-color: #f2f2f2;
+}
+
+i.remove:hover {
+	color: red;
+	cursor: pointer;
+}
+
+select.wishlist {
+	width: 200px;
+}

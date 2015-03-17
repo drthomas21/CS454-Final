@@ -1,19 +1,26 @@
 app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($scope,$rootScope,RequestService) {
 	$scope.showAddInput = false;
 	$scope.tempItem = "";
+	$scope.selectedList;
+	$scope.newItem = "";
+	$scope.Model = {};
 	
-	$scope.Model = {
+	$scope.allWishlists = [];
+	
+	var resetModel = function() {
+		$scope.Model = {
 			_id: 0,
 			name: '',
 			description: '',
 			items: [],
 			date: ''
-	};
-	
-	$scope.Objects = [];
-	
+		};
+	}
+
 	var init = function() {
-		
+		$scope.create();
+		$scope.getList();
+		resetModel();
 	};
 	
 	$scope.showShortForm = function() {
@@ -23,11 +30,21 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 	$scope.addItem = function() {
 		if($scope.tempItem.trim() != "") {
 			$scope.Model.items.push($scope.tempItem.trim());
-			console.log($scope.Model);
 			$scope.showAddInput = false;
 			$scope.tempItem = "";
 		}
 	};
+
+	$scope.addToExisting = function() {
+		// get the wishlist model
+		RequestService.get($scope.selectedList._id, function(result) {
+			var model = result.Model;
+			model.items.push($scope.newItem);
+			update(model);
+			$scope.getList();
+			$scope.newItem = "";
+		});
+	}
 	
 	$scope.removeItem = function(i) {
 		$scope.Model.items.splice(i,1);
@@ -51,35 +68,53 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 		});
 	};
 	
-	$scope.list = function() {
+	$scope.getList = function() {
 		RequestService.list(function(json){
 			if(json.err) {
 				alert(json.err);
 			}
-			
-			$scope.Objects = json.Models;			
+			$scope.allWishlists = json.Models;
+			$scope.selectedList = $scope.allWishlists[0];
 		});
 	};
+
+	$scope.viewModel = function(id) {
+		RequestService.view(id);
+	}
 	
 	$scope.createModel = function() {
 		RequestService.create($scope.Model,function(json){
-			$scope.Model = json.Model;
+			resetModel();
+			$scope.getList();
+			//$scope.Model = json.Model;
 			if($scope.err) {
 				alert($scope.err);
 			} else {
-				RequestService.view($scope.Model._id);
+				//RequestService.view($scope.Model._id);
 			}
-			
 		});
 	};
+
+	// update the model without affecting the form
+	var update = function(Model) {
+		RequestService.update(Model,function(json){
+			console.log(json.Model.name + ' has been updated.')
+			if($scope.err) {
+				alert($scope.err);
+			} else {
+				//RequestService.view($scope.Model._id);
+			}
+		});
+	}
 	
+	// update model based on form input
 	$scope.updateModel = function() {
 		RequestService.update($scope.Model,function(json){
 			$scope.Model = json.Model;
 			if($scope.err) {
 				alert($scope.err);
 			} else {
-				RequestService.view($scope.Model._id);
+				//RequestService.view($scope.Model._id);
 			}
 			
 		});

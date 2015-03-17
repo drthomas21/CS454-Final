@@ -3,7 +3,7 @@ app.controller('PageViewCtrl',['$scope','$rootScope',function($scope,$rootScope)
 	
 	var init = function() {
 		if(window.location.pathname == "/" || window.location.pathname == "") {
-			$scope.src = "/views/create";
+			$scope.src = "/views/welcome";
 		} else if(window.location.pathname == "/wishlists") {
 			$scope.src = "/views/list";		
 		} else if(window.location.pathname.match(/^\/[A-Za-z0-9]+/)) {
