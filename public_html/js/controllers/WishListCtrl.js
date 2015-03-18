@@ -1,11 +1,14 @@
-app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($scope,$rootScope,RequestService) {
+app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestService',function($scope,$rootScope,$location,RequestService) {
 	$scope.showAddInput = false;
 	$scope.tempItem = "";
 	$scope.selectedList;
 	$scope.newItem = "";
 	$scope.Model = {};
+	$scope.id = null;
 	
 	$scope.allWishlists = [];
+
+	var url = $location.absUrl().split('/');
 	
 	var resetModel = function() {
 		$scope.Model = {
@@ -59,11 +62,11 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 	$scope.search = function() {
 		var matches = window.location.pathname.match(/^\/([A-Za-z0-9]+)/);
 		var id = matches[1];
+		console.log('id from "search": ' + id);
 		RequestService.get(id,function(json){
 			if(json.err) {
 				alert(json.err);
 			}
-			
 			$scope.Model = json.Model;	
 		});
 	};
@@ -102,6 +105,8 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 			if($scope.err) {
 				alert($scope.err);
 			} else {
+				// display "model updated!" in UI
+				
 				//RequestService.view($scope.Model._id);
 			}
 		});
@@ -114,6 +119,8 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 			if($scope.err) {
 				alert($scope.err);
 			} else {
+				// display "model updated!" in UI
+
 				//RequestService.view($scope.Model._id);
 			}
 			
@@ -145,5 +152,11 @@ app.controller('WishListCtrl',['$scope','$rootScope','RequestService',function($
 		}		
 	};
 	
+	// get the id from the url
+	// if the 
+	if(url[url.length-1].length != 0) {
+		$scope.id = url[url.length -1];
+		$scope.search();
+	}
 	init();
 }]);
