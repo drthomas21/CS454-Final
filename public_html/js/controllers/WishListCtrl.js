@@ -106,7 +106,7 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 				alert($scope.err);
 			} else {
 				// display "model updated!" in UI
-				
+
 				//RequestService.view($scope.Model._id);
 			}
 		});
@@ -123,7 +123,6 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 
 				//RequestService.view($scope.Model._id);
 			}
-			
 		});
 	};
 	
@@ -141,15 +140,15 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 			if(json.err) {
 				alert(err);
 			} else {
-				window.location.href = window.location.href;
-			} 
+				window.location.href = "/";
+			}
 		};
 		
 		if(Model) {
 			RequestService.remove(Model,removeCallback);
 		} else {
 			RequestService.remove($scope.Model,removeCallback);
-		}		
+		}
 	};
 	
 	// get the id from the url
