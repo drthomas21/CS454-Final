@@ -1,35 +1,38 @@
 <!-- view and modify a wishlist -->
-<div class="col-sm-8 col-sm-offset-2" ng-controller="WishListCtrl">
-	<div class="row">
-		<h3 class="text-center">View/Modify WishList</h3>
-		<form class="form col-sm-8 col-sm-offset-2">
-			<div class="form-group">
-				<label>Name:</label>
-				<input type="text" class="form-control" ng-model="Model.name" />
-			</div>
-			<div class="form-group">
-				<label>Description:</label>
-				<textarea class="form-control" row="3" ng-model="Model.description"></textarea>
-			</div>
-			<div class="form-group">
-				<button ng-click="showShortForm()" style="margin-bottom: 5px"><i class="glyphicon glyphicon-plus"></i> Add Item</button>
-				<div ng-show="showAddInput">
-					<input type="text" class="form-control" ng-model="tempItem" placeholder="item name"/>
-					<button class="col-lg-1 pull-right btn btn-default" ng-click="addItem()" style="margin-top: -34px;">Add</button>
+<div class="row" ng-controller="WishListCtrl">
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class="row">
+			<h3 class="text-center">View/Modify WishList</h3>
+			<form class="form col-sm-8 col-sm-offset-2">
+				<div class="form-group">
+					<label>Name:</label>
+					<input type="text" class="form-control" ng-model="Model.name" />
 				</div>
-				<div ng-show="Model.items.length > 0"> 
-					<label style="margin-top: 15px">Items</label>
-					<ol class="newItems">
-						<li ng-repeat="item in Model.items">{{item}} 
-							<i ng-click="removeItem($index)" class="glyphicon glyphicon-remove remove pull-right"></i></li>
-					</ol>
+				<div class="form-group">
+					<label>Description:</label>
+					<textarea class="form-control" row="3" ng-model="Model.description"></textarea>
 				</div>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-warning" ng-show="Model.name.length > 0" ng-click="updateModel()">Update  <span class="glyphicon glyphicon-ok-circle"></span></button>
-				<button class="btn btn-warning" ng-show="Model.name.length == 0" disabled ng-click="updateModel()">Update <span class="glyphicon glyphicon-ok-circle"></span></button>
-				<button class="btn btn-danger pull-right" ng-click="removeModel()">Delete <span class="glyphicon glyphicon-"></span></button>
-			</div>
-		</form>
+				<div class="form-group">
+					<button ng-click="showShortForm()" style="margin-bottom: 5px"><i class="glyphicon glyphicon-plus"></i> Add Item</button>
+					<div ng-show="showAddInput">
+						<input type="text" class="form-control" ng-model="tempItem" placeholder="item name"/>
+						<button class="col-lg-1 pull-right btn btn-default" ng-click="addItem()" style="margin-top: -34px;">Add</button>
+					</div>
+					<div ng-show="Model.items.length > 0"> 
+						<label style="margin-top: 15px">Items</label>
+						<ol class="newItems">
+							<li ng-repeat="item in Model.items">{{item}} 
+								<i ng-click="removeItem($index)" class="glyphicon glyphicon-remove remove pull-right"></i></li>
+						</ol>
+					</div>
+				</div>
+				<hr>
+				<div class="form-group">
+					<button class="btn btn-warning" ng-show="Model.name.length > 0" ng-click="updateModel()">Update  <span class="glyphicon glyphicon-ok-circle"></span></button>
+					<button class="btn btn-warning" ng-show="Model.name.length == 0" disabled ng-click="updateModel()">Update <span class="glyphicon glyphicon-ok-circle"></span></button>
+					<button class="btn btn-danger pull-right" ng-click="removeModel()">Delete WishList<span class="glyphicon glyphicon-"></span></button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

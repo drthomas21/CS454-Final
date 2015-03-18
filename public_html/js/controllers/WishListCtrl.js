@@ -153,7 +153,7 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 	
 	// get the id from the url
 	// if the 
-	if(url[url.length-1].length != 0) {
+	if(url[url.length-1].length != 0 && url[url.length-1].localeCompare('wishlists') != 0) {
 		$scope.id = url[url.length -1];
 		$scope.search();
 	}
