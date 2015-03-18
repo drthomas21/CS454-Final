@@ -1,5 +1,5 @@
-module.exports = function(server) {
-	var Wishlist = require('../models/WishList.js');
+module.exports = function(server,mongoose) {
+	var Wishlist = require('../models/WishList.js')(mongoose);
 	
 	server.post('/api/create',function(req,res) {
 		var Input = req.body;

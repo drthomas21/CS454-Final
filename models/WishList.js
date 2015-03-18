@@ -1,27 +1,18 @@
-var mongoose = require('mongoose');
-var config = require("../config.json");
-mongoose.connect('mongodb://'+config.mongodb.host+"/"+config.mongodb.database,{
-	db: {native_parser: true},
-	user: config.mongodb.username,
-	pass: config.mongodb.password
-});
-var db = mongoose.connection;
-db.on('error',function(err) {
-	console.log(err);
-	process.exit(1);
-})
-var Schema = mongoose.Schema;
-
-var WishList = mongoose.model("Wishlist", new Schema({
-	id:				Schema.Types.ObjectId,
-	name:			String,
-	description:	String,
-	items:			[String],
-	date:			{type: Date, default: Date.now}
-}));
 
 
-module.exports = {
+
+module.exports = function(mongoose) {
+	var Schema = mongoose.Schema;
+
+	var WishList = mongoose.model("Wishlist", new Schema({
+		id:				Schema.Types.ObjectId,
+		name:			String,
+		description:	String,
+		items:			[String],
+		date:			{type: Date, default: Date.now}
+	}));
+	
+	return {
 		create: function() {
 			return new WishList();
 		},
@@ -47,4 +38,5 @@ module.exports = {
 				}
 			});
 		}
+	};
 }
