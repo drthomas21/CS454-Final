@@ -39,3 +39,17 @@ i.remove:hover {
 select.wishlist {
 	width: 200px;
 }
+
+.modify {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 50px 0;
+}
+
+span.active {
+	background-color: #FF2020;
+}
+
+.updated {
+	
+}

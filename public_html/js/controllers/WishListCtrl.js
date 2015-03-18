@@ -1,10 +1,12 @@
-app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestService',function($scope,$rootScope,$location,RequestService) {
+app.controller('WishListCtrl',['$scope','$rootScope', '$location', '$timeout', 'RequestService',function($scope,$rootScope,$location,$timeout,RequestService) {
 	$scope.showAddInput = false;
 	$scope.tempItem = "";
 	$scope.selectedList;
 	$scope.newItem = "";
 	$scope.Model = {};
 	$scope.id = null;
+	$scope.updatedId = null;
+	$scope.updated = false;
 	
 	$scope.allWishlists = [];
 
@@ -44,8 +46,12 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 			var model = result.Model;
 			model.items.push($scope.newItem);
 			update(model);
-			$scope.getList();
 			$scope.newItem = "";
+			$scope.updatedId = model._id;
+			// get the list again after 400ms
+			$timeout(function(){
+				$scope.getList();
+			},400);
 		});
 	}
 	
@@ -72,6 +78,7 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 	};
 	
 	$scope.getList = function() {
+		$scope.allWishlists = null;
 		RequestService.list(function(json){
 			if(json.err) {
 				alert(json.err);
@@ -98,7 +105,7 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 		});
 	};
 
-	// update the model without affecting the form
+	// update the model without affecting the form ('welcome' view)
 	var update = function(Model) {
 		RequestService.update(Model,function(json){
 			console.log(json.Model.name + ' has been updated.')
@@ -106,13 +113,13 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 				alert($scope.err);
 			} else {
 				// display "model updated!" in UI
-
+				$scope.updatedId = json.Model._id;
 				//RequestService.view($scope.Model._id);
 			}
 		});
 	}
 	
-	// update model based on form input
+	// update model based on form input, from 'view' view
 	$scope.updateModel = function() {
 		RequestService.update($scope.Model,function(json){
 			$scope.Model = json.Model;
@@ -120,7 +127,7 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', 'RequestServi
 				alert($scope.err);
 			} else {
 				// display "model updated!" in UI
-
+				window.location.href = "/";
 				//RequestService.view($scope.Model._id);
 			}
 		});
