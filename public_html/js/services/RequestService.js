@@ -1,4 +1,4 @@
-app.factory('RequestService',['$rootScope','$http',function($rootScope,$http){
+app.factory('RequestService',['$http',function($http){
 var RequestService = {
 	//Address Change
 	view: function(id) {
