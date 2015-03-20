@@ -17,7 +17,6 @@ module.exports = function(server,mongoose) {
 	});
 	
 	server.get('/api/get', function(req,res){
-		var id = req.params.id;
 		Wishlist.get(function(err, Models) {
 			res.json({
 				err: err,
