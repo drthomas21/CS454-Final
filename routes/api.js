@@ -17,20 +17,20 @@ module.exports = function(server,mongoose) {
 	});
 	
 	server.get('/api/get', function(req,res){
-		Wishlist.get(function(err, Models) {
+		Wishlist.get(function(err, results) {
 			res.json({
 				err: err,
-				Models: Models
+				Models: results
 			});
 		});
 	});
 	
 	server.get('/api/get/:id', function(req,res){
 		var id = req.params.id;
-		Wishlist.search({'_id': id},function(err, Models) {
+		Wishlist.search({'_id': id},function(err, results) {
 			var Model = null;
-			if(Models && Models.length > 0) {
-				Model = Models[0];
+			if(results && results.length > 0) {
+				Model = results[0];
 			} else if(!err){
 				err = "Object does not exists";
 			}
@@ -45,14 +45,14 @@ module.exports = function(server,mongoose) {
 	server.put('/api/update/:id',function(req,res){
 		var id = req.params.id;
 		var Input = req.body;
-		Wishlist.search({'_id': id},function(err, Models) {
+		Wishlist.search({'_id': id},function(err, results) {
 			if(err) {
 				res.json({
 					err: err,
 					Model: null
 				});
-			} else if(Models.length > 0){
-				var Model = Models[0];
+			} else if(results.length > 0){
+				var Model = results[0];
 				Model.name = Input.name;
 				Model.description = Input.description;
 				Model.items = Input.items;
@@ -73,9 +73,9 @@ module.exports = function(server,mongoose) {
 	
 	server.delete('/api/remove/:id',function(req,res){
 		var id = req.params.id;
-		Wishlist.search({'_id': id},function(err, Models) {
-			if(!err && Models.length > 0) {
-				var Model = Models[0];
+		Wishlist.search({'_id': id},function(err, results) {
+			if(!err && results.length > 0) {
+				var Model = results[0];
 				Wishlist.remove(Model);
 			} else if(Models.length == 0) {
 				err = "Object does not exists";
