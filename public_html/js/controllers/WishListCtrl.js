@@ -68,7 +68,6 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', '$timeout', '
 	$scope.search = function() {
 		var matches = window.location.pathname.match(/^\/([A-Za-z0-9]+)/);
 		var id = matches[1];
-		console.log('id from "search": ' + id);
 		RequestService.get(id,function(json){
 			if(json.err) {
 				alert(json.err);
@@ -108,7 +107,6 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', '$timeout', '
 	// update the model without affecting the form ('welcome' view)
 	var update = function(Model) {
 		RequestService.update(Model,function(json){
-			console.log(json.Model.name + ' has been updated.')
 			if($scope.err) {
 				alert($scope.err);
 			} else {
@@ -164,5 +162,6 @@ app.controller('WishListCtrl',['$scope','$rootScope', '$location', '$timeout', '
 		$scope.id = url[url.length -1];
 		$scope.search();
 	}
+
 	init();
 }]);

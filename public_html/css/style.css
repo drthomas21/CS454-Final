@@ -53,3 +53,11 @@ span.active {
 .updated {
 	
 }
+
+button.edit, button.remove {
+	display: inline;
+}
+
+button.remove {
+	
+}

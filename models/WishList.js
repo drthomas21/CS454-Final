@@ -1,6 +1,3 @@
-
-
-
 module.exports = function(mongoose) {
 	var Schema = mongoose.Schema;
 
@@ -32,7 +29,7 @@ module.exports = function(mongoose) {
 		save: function(instance,callback) {
 			instance.save(function(err, Model) {
 				if(err) {
-					callback('There was an issue with saveing', Model);
+					callback('There was an issue with saving', Model);
 				} else {
 					callback(null, Model);
 				}
